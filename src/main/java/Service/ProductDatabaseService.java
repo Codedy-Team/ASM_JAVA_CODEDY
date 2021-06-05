@@ -1,15 +1,21 @@
 package Service;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ProductDatabaseService {
 
+    private DataSource dataSource;
+
+    public ProductDatabaseService (DataSource theDataSource) {
+        dataSource = theDataSource;
+    }
+
+
+
     private void close(Connection connection, Statement statement, ResultSet resultSet) {
-
-
-
         try {
             if (resultSet != null) {
                 resultSet.close();

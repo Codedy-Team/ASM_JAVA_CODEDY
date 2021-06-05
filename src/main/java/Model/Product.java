@@ -59,6 +59,7 @@ public class Product {
         Description = description;
         Featured = featured;
     }
+
     public int getId() {
         return id;
     }

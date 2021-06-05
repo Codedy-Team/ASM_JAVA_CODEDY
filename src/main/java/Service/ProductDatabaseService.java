@@ -8,7 +8,7 @@ public class ProductDatabaseService {
 
     private void close(Connection connection, Statement statement, ResultSet resultSet) {
 
-        
+
 
         try {
             if (resultSet != null) {

@@ -12,11 +12,13 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-@WebServlet(name = "edit", value = "admin/product/edit")
+@WebServlet(urlPatterns = {"/admin/product/edit/"})
 public class Edit extends HttpServlet {
     private ProductDatabaseService productDatabaseService;
     private DataSource dataSource;
@@ -41,6 +43,19 @@ public class Edit extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // read product id from form data
+        String theProductId = request.getParameter("id");
+        // get product from database (db util)
+        Product theProduct = null;
+        try {
+            theProduct = productDatabaseService.getProduct(theProductId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // place student in the request attribute
+        request.setAttribute("product", theProduct);
+        request.getRequestDispatcher("/view/dashboard/edit.jsp").forward(request, response);
 
     }
 
@@ -82,5 +97,22 @@ public class Edit extends HttpServlet {
 
         response.sendRedirect(request.getContextPath() + "/product-menu/show/?id=" + id);
 
+    }
+    private void loadProduct(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+        // read student id from form data
+        String theStudentId = request.getParameter("id");
+
+        // get student from database (db util)
+        Product theProduct = productDatabaseService.getProduct(theStudentId);
+
+        // place student in the request attribute
+        request.setAttribute("THE_PRODUCT", theProduct);
+
+        // send to jsp page: update-student-form.jsp
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher("/edit.jsp");
+        dispatcher.forward(request, response);
     }
 }

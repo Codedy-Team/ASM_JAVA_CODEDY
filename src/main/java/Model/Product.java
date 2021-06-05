@@ -3,6 +3,7 @@ package Model;
 import java.util.Date;
 
 public class Product {
+    private int id;
     private int ProductCategoryId;
     private int RestaurantId;
     private String Name;
@@ -21,6 +22,14 @@ public class Product {
 
     private int Version;
     private Boolean Deleted;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getProductCategoryId() {
         return ProductCategoryId;

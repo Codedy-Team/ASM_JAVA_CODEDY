@@ -23,6 +23,43 @@ public class Product {
     private int Version;
     private Boolean Deleted;
 
+    public Product(int id, int productCategoryId, int restaurantId, String name, String ingredients, Double price, String image, String country, String tag, String description, Boolean featured, Date createdAt, String createdBy, Date updatedAt, String updatedBy, int version, Boolean deleted) {
+        this.id = id;
+        ProductCategoryId = productCategoryId;
+        RestaurantId = restaurantId;
+        Name = name;
+        Ingredients = ingredients;
+        Price = price;
+        Image = image;
+        Country = country;
+        Tag = tag;
+        Description = description;
+        Featured = featured;
+        CreatedAt = createdAt;
+        CreatedBy = createdBy;
+        UpdatedAt = updatedAt;
+        UpdatedBy = updatedBy;
+        Version = version;
+        Deleted = deleted;
+    }
+
+    public Product(){
+
+    }
+
+    public Product(int productCategoryId, int restaurantId, String name, String ingredients, Double price, String image, String country, String tag, String description, Boolean featured) {
+        ProductCategoryId = productCategoryId;
+        RestaurantId = restaurantId;
+        Name = name;
+        Ingredients = ingredients;
+        Price = price;
+        Image = image;
+        Country = country;
+        Tag = tag;
+        Description = description;
+        Featured = featured;
+    }
+
     public int getId() {
         return id;
     }

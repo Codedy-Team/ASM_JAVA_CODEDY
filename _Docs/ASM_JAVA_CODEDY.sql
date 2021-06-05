@@ -5,7 +5,7 @@
 DROP DATABASE IF EXISTS `asm_codedy`;
 CREATE DATABASE IF NOT EXISTS `asm_codedy` CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-USE `WCD_WebComponentDevelopment`;
+USE `asm_codedy`;
 
 SET time_zone = '+07:00';
 ALTER DATABASE `asm_codedy` CHARACTER SET utf8 COLLATE utf8_unicode_ci;

@@ -2,6 +2,7 @@
 <html class="no-js" lang="zxx">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Restaurant</title>
@@ -51,7 +52,7 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a class="active" href="index.jsp">home</a></li>
-                                            <li><a href="menu.jsp">Menu</a></li>
+                                            <li><a href="/ASM_JAVA_CODEDY_war_exploded/product/menu">Menu</a></li>
                                             <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="about.jsp">about</a></li>
@@ -96,7 +97,7 @@
                             <div class="slider_text text-center">
                                 <h3>Fresh and Delicious Food
                                     For your Health</h3>
-                                <a href="menu.jsp" class="boxed-btn3">View Menus</a>
+                                <a href="/ASM_JAVA_CODEDY_war_exploded/product/menu" class="boxed-btn3">View Menus</a>
                             </div>
                         </div>
                     </div>
@@ -109,7 +110,7 @@
                             <div class="slider_text text-center">
                                 <h3>Fresh and Delicious Food
                                     For your Health</h3>
-                                <a href="menu.jsp" class="boxed-btn3">View Menus</a>
+                                <a href="/ASM_JAVA_CODEDY_war_exploded/product/menu" class="boxed-btn3">View Menus</a>
                             </div>
                         </div>
                     </div>
@@ -122,7 +123,7 @@
                             <div class="slider_text text-center">
                                 <h3>Fresh and Delicious Food
                                     For your Health</h3>
-                                <a href="menu.jsp" class="boxed-btn3">View Menus</a>
+                                <a href="/ASM_JAVA_CODEDY_war_exploded/product/menu" class="boxed-btn3">View Menus</a>
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,7 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="admin/product/">Hello Codedy</a>
+<a href="view/front/index.jsp">Hello Codedy</a>
+<a href="admin/product/">Hello Codedy admin</a>
 </body>
 </html>

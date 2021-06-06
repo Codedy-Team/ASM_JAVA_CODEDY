@@ -27,6 +27,14 @@
 
     <link rel="stylesheet" href="assets/front/css/style.css">
     <!-- <link rel="stylesheet" href="assets/front/css/responsive.css"> -->
+    <style>
+        .text{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+    </style>
 </head>
 
 <body>
@@ -166,7 +174,7 @@
                                 </div>
                                 <div class="info">
                                     <h3>#${product.id}. ${product.name}</h3>
-                                    <p>${product.description}</p>
+                                    <p class="text">${product.description}</p>
                                     <span>$${product.price}</span>
                                 </div>
                             </div>

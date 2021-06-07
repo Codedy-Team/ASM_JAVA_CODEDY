@@ -102,7 +102,7 @@
                     <td>${product.ingredients}</td>
                     <td>$${product.price}</td>
                     <td>
-                        <a href="product-menu/show/?id=${product.id}" class="view">
+                        <a href="admin/product/show/?id=${product.id}" class="view">
                             <input type="hidden" name="id" value="${ product.id }">
                             <i class="material-icons" data-toggle="tooltip" title="View">&#xe8f4;</i>
                         </a>

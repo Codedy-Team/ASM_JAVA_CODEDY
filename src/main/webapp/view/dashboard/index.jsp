@@ -103,9 +103,11 @@
                     <td>$${product.price}</td>
                     <td>
                         <a href="product-menu/show/?id=${product.id}" class="view">
+                            <input type="hidden" name="id" value="${ product.id }">
                             <i class="material-icons" data-toggle="tooltip" title="View">&#xe8f4;</i>
                         </a>
-                        <a href="product-menu/edit/?id=${product.id}" class="edit">
+                        <a href="admin/product/edit/?id=${product.id}" class="edit">
+                            <input type="hidden" name="id" value="${ product.id }">
                             <i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
                         </a>
                         <form action="product-menu/delete" method="post" style="display: inline-block">

@@ -1,10 +1,13 @@
 package Service;
 
 import Model.Product;
+import jakarta.servlet.ServletException;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +48,7 @@ public class ProductDatabaseService {
         }
     }
 
-    private Product getProductFormResultSet(ResultSet resultSet) throws SQLException, SQLException {
+    public Product getProductFormResultSet(ResultSet resultSet) throws SQLException, SQLException {
 
         Product item = new Product();
 
@@ -70,6 +73,87 @@ public class ProductDatabaseService {
         item.setDeleted(resultSet.getBoolean("deleted"));
 
         return item;
+    }
+    public void update(Product item) throws Exception  {
+
+        Connection myConn = null;
+        PreparedStatement myStmt = null;
+
+        try {
+            // get db connection
+            myConn = dataSource.getConnection();
+
+            // create SQL update statement
+            String sql = "UPDATE product "
+                    + "SET product_category_id = ?, restaurant_id = ?, name = ?, ingredients = ?, price = ?, image = ?, country = ?, tag = ?, description = ?, featured = ?, updated_at = ?, updated_by = ?, version = ? "
+                    + "WHERE id = ?";
+
+            // prepare statement
+            myStmt = myConn.prepareStatement(sql);
+
+            // set params
+            myStmt.setInt(1, item.getProductCategoryId());
+            myStmt.setInt(2, item.getRestaurantId());
+            myStmt.setString(3, item.getName());
+            myStmt.setString(4, item.getIngredients());
+            myStmt.setDouble(5, item.getPrice());
+            myStmt.setString(6, item.getImage());
+            myStmt.setString(7, item.getCountry());
+            myStmt.setString(8, item.getTag());
+            myStmt.setString(9, item.getDescription());
+            myStmt.setBoolean(10, item.getFeatured());
+            myStmt.setString(12, "MH");
+            myStmt.setInt(13, item.getVersion() + 1);
+            myStmt.setInt(14, item.getId());
+            myStmt.setString(11, (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(Calendar.getInstance().getTime()));
+
+
+            // execute SQL statement
+            myStmt.execute();
+        }
+        finally {
+            // clean up JDBC objects
+            close(myConn, myStmt, null);
+        }
+    }
+    public Product getProduct(String theProductId) throws Exception {
+
+        Product theProduct = null;
+
+        Connection myConn = null;
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        int productId = Integer.parseInt(theProductId);
+
+        try {
+            // convert student id to int
+//            productId = Integer.parseInt(theProductId);
+
+            // get connection to database
+            myConn = dataSource.getConnection();
+
+            // create sql to get selected student
+            String sql = "select * from product where id=?";
+
+            // create prepared statement
+            myStmt = myConn.prepareStatement(sql);
+
+            // set params
+            myStmt.setInt(1, productId);
+
+            // execute statement
+            myRs = myStmt.executeQuery();
+
+            // retrieve data from result set row
+
+            if (myRs.next()) {
+                 theProduct = getProductFormResultSet(myRs);
+            }
+
+            return theProduct;
+        } finally {
+            close(myConn, myStmt, myRs);
+        }
     }
 
 

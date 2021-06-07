@@ -22,6 +22,8 @@ import java.util.Calendar;
 public class Edit extends HttpServlet {
     private ProductDatabaseService productDatabaseService;
     private DataSource dataSource;
+    Product theProduct = null;
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -46,7 +48,6 @@ public class Edit extends HttpServlet {
         // read product id from form data
         String theProductId = request.getParameter("id");
         // get product from database (db util)
-        Product theProduct = null;
         try {
             theProduct = productDatabaseService.getProduct(theProductId);
         } catch (Exception e) {
@@ -62,40 +63,27 @@ public class Edit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        int product_category_id = Integer.parseInt(request.getParameter("product_category_id"));
-        int restaurant_id = Integer.parseInt(request.getParameter("restaurant_id"));
-
-        String name = request.getParameter("name");
-        String ingredients = request.getParameter("ingredients");
-        Double price = Double.parseDouble(request.getParameter("price"));
-        String image = request.getParameter("image");
-        String country = request.getParameter("country");
-        String tag = request.getParameter("tag");
-        String description = request.getParameter("description");
-        Boolean featured = Boolean.parseBoolean(request.getParameter("featured"));
-        String created_by = request.getParameter("created_by");
-        java.util.Date created_at = null;
+        String idStr =  request.getParameter("id");
         try {
-            created_at = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("created_at"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String updated_by = request.getParameter("updated_by");
-        Date updated_at = new Date(Calendar.getInstance().getTime().getTime());
-        int version =  Integer.parseInt(request.getParameter("version"));
+            Product product = productDatabaseService.getProduct(idStr);
+            product.setProductCategoryId(Integer.parseInt(request.getParameter("productCategoryId")));
+            product.setRestaurantId(Integer.parseInt(request.getParameter("restaurantId")));
+            product.setName(request.getParameter("name"));
+            product.setIngredients(request.getParameter("ingredients"));
+            product.setPrice(Double.parseDouble(request.getParameter("price")));
+            product.setImage(request.getParameter("image"));
+            product.setCountry(request.getParameter("country"));
+            product.setTag(request.getParameter("tag"));
+            product.setDescription(request.getParameter("description"));
+            product.setFeatured(Boolean.parseBoolean(request.getParameter("featured")));
 
-        Product product = new Product(id, product_category_id, restaurant_id, name, ingredients,price,image, country, tag,description, featured,
-                created_at,created_by,updated_at, updated_by,version,false );
-
-
-        try {
+            product.setVersion(Integer.parseInt(request.getParameter("version")));
             productDatabaseService.update(product);
+       response.sendRedirect(request.getContextPath() + "/product/show/?id=" + product.getId());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        response.sendRedirect(request.getContextPath() + "/product-menu/show/?id=" + id);
 
     }
     private void loadProduct(HttpServletRequest request, HttpServletResponse response)

@@ -1,9 +1,11 @@
 package Service;
 
 import Model.Product;
+import jakarta.servlet.ServletException;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -72,7 +74,7 @@ public class ProductDatabaseService {
 
         return item;
     }
-    public void update(Product item) throws Exception {
+    public void update(Product item) throws Exception  {
 
         Connection myConn = null;
         PreparedStatement myStmt = null;
@@ -83,7 +85,7 @@ public class ProductDatabaseService {
 
             // create SQL update statement
             String sql = "UPDATE product "
-                    + "SET product_category_id = ?, restaurant_id = ?, name = ?, ingredients = ?, price = ?, image = ?, country = ?, tag = ?, description = ?, featured = ?, updated_at = ?, updated_by = ?, version = ?, deleted =?"
+                    + "SET product_category_id = ?, restaurant_id = ?, name = ?, ingredients = ?, price = ?, image = ?, country = ?, tag = ?, description = ?, featured = ?, updated_at = ?, updated_by = ?, version = ? "
                     + "WHERE id = ?";
 
             // prepare statement
@@ -100,11 +102,11 @@ public class ProductDatabaseService {
             myStmt.setString(8, item.getTag());
             myStmt.setString(9, item.getDescription());
             myStmt.setBoolean(10, item.getFeatured());
-            myStmt.setDate(11, (java.sql.Date) new Date(Calendar.getInstance().getTime().getTime()));
-            myStmt.setString(12, "CODEDY");
+            myStmt.setString(12, "MH");
             myStmt.setInt(13, item.getVersion() + 1);
-            myStmt.setBoolean(14, item.getDeleted());
-            myStmt.setInt(15, item.getId());
+            myStmt.setInt(14, item.getId());
+            myStmt.setString(11, (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(Calendar.getInstance().getTime()));
+
 
             // execute SQL statement
             myStmt.execute();

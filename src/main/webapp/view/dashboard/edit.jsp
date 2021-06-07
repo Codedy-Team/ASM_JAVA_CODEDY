@@ -1,8 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <base href="">
+    <base href="<c:url value="/"/>">
     
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,109 +52,112 @@
                 </div>
             </div>
             <div class="">
-                <form action="edit" method="post">
+                <input type="hidden" name="productId" value="${product.id}" />
+
+                <form action="admin/product/edit/?id=${ product.id }" method="post">
                     <div class="modal-header">
                         <button class="back" style="vertical-align: middle"
-                            onclick="window.location.href=''; return false;">
+                                onclick="window.location.href='product-menu'; return false;">
                             <i class="material-icons" data-toggle="tooltip" title="Back to list">&#xe5c4;</i>
                         </button>
                         <h4 style="display: inline-block" class="modal-title">Update Product Detail</h4>
                         <div style="display: inline-block; float: right">
                             <button type="submit" class="save">
-                                <i class="material-icons" style="font-weight: bold; padding-right: 10px"
-                                    data-toggle="tooltip" title="Save">&#xe5ca;</i>
+                                <i class="material-icons" style="font-weight: bold; padding-right: 10px" data-toggle="tooltip" title="Save">&#xe5ca;</i>
                             </button>
-                            <button class="cancel" onclick="window.location.href='show.html'; return false;">
-                                <i class="material-icons" style="font-weight: bold" data-toggle="tooltip"
-                                    title="Cancel">&#xe5cd;</i>
+                            <button class="cancel"
+                                    onclick="window.location.href='product-menu/show/?id=${ product.id }'; return false;">
+                                <i class="material-icons" style="font-weight: bold" data-toggle="tooltip" title="Cancel">&#xe5cd;</i>
                             </button>
                         </div>
                     </div>
 
                     <div class="modal-body">
 
-                        <input type="hidden" name="version" value="">
+
+                        <input type="hidden" name="version" value="${ product.version }">
 
                         <div class="form-group">
                             <label>name:</label>
-                            <input class="form-control" type="text" name="name" value="Cappuccino" required>
+                            <input class="form-control" type="text" name="name" value="${ product.name }" required>
                         </div>
 
                         <div class="form-group">
                             <label>productCategoryId:</label>
-                            <input class="form-control" type="text" name="productCategoryId" value="10" required>
+                            <input class="form-control" type="text" name="productCategoryId"
+                                   value="${ product.productCategoryId }" required>
                         </div>
 
                         <div class="form-group">
                             <label>restaurantId:</label>
-                            <input class="form-control" type="text" name="restaurantId" value="1" required>
+                            <input class="form-control" type="text" name="restaurantId" value="${ product.restaurantId }"
+                                   required>
                         </div>
 
                         <div class="form-group">
                             <label>ingredients:</label>
-                            <input class="form-control" type="text" name="ingredients" value="Coffee, milk, cream"
-                                required>
+                            <input class="form-control" type="text" name="ingredients" value="${ product.ingredients }"
+                                   required>
                         </div>
 
                         <div class="form-group">
                             <label>price:</label>
-                            <input class="form-control" type="text" name="price" value="12.68" required>
+                            <input class="form-control" type="text" name="price" value="${ product.price }" required>
                         </div>
 
                         <div class="required-group">
                             <label>image:</label>
-                            <input class="form-control" type="text" name="image" value="capuchino.jpg" required>
+                            <input class="form-control" type="text" name="image" value="${ product.image }" required>
                         </div>
 
                         <div class="form-group">
                             <label>country:</label>
-                            <input class="form-control" type="text" name="country" value="Italy" required>
+                            <input class="form-control" type="text" name="country" value="${ product.country }" required>
                         </div>
 
                         <div class="form-group">
                             <label>tag:</label>
-                            <input class="form-control" type="text" name="tag" value="Dinner" required>
+                            <input class="form-control" type="text" name="tag" value="${ product.tag }" required>
                         </div>
 
                         <div class="form-group">
                             <label>description:</label>
-                            <textarea class="form-control" id="description" name="description" rows="5"
-                                required>As cappuccino is defined today, in addition to a single shot of espresso, the most important factors in preparing a cappuccino are the texture and temperature of the milk. When a barista steams the milk for a cappuccino, microfoam is created by introducing very tiny bubbles of air into the milk, giving the milk a velvety texture. The traditional cappuccino consists of a single espresso, on which the barista pours the hot foamed milk, resulting in a 2 cm (3⁄4 in) thick milk foam on top. Variations could be made adding another shot of espresso resulting in a double cappuccino. Attaining the correct ratio of foam requires close attention while steaming the milk, thus making the cappuccino one of the most difficult espresso-based beverages to make properly. A skilled barista may obtain artistic shapes (latte art while pouring the milk on the top of the espresso coffee).</textarea>
+                            <textarea class="form-control" id="description" name="description" required>${ product.description }</textarea>
                         </div>
 
                         <div class="form-group">
                             <label>featured:</label>
-                            <input class="form-control" type="text" name="featured" value="true" required>
+                            <input class="form-control" type="text" name="featured" value="${ product.featured }" required>
                         </div>
 
                         <div class="form-group">
                             <label>createdAt:</label>
-                            <p>2021-06-03</p>
+                            <p>${ product.createdAt }</p>
                         </div>
 
                         <div class="form-group">
                             <label>createdBy:</label>
-                            <p>Hieu_iceTea</p>
+                            <p>${ product.createdBy }</p>
                         </div>
 
                         <div class="form-group">
                             <label>updatedAt:</label>
-                            <p></p>
+                            <p>${ product.updatedAt }</p>
                         </div>
 
                         <div class="form-group">
                             <label>updatedBy:</label>
-                            <p></p>
+                            <p>${ product.updatedBy }</p>
                         </div>
 
                         <div class="form-group">
                             <label>version:</label>
-                            <p>1</p>
+                            <p>${ product.version }</p>
                         </div>
 
                         <div class="form-group">
                             <label>deleted:</label>
-                            <p>false</p>
+                            <p>${ product.deleted }</p>
                         </div>
 
                         <div class="modal-footer">
@@ -160,8 +165,10 @@
                             <input type="submit" class="btn btn-info" value="Save">
                         </div>
 
+
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

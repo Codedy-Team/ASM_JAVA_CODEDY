@@ -1,6 +1,13 @@
 package Model;
 
+import MyUtilities.DatabaseUtility;
+import Service.ProductDatabaseService;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import java.util.Date;
+import java.util.List;
 
 public class Product {
     private int id;
@@ -195,4 +202,91 @@ public class Product {
     public void setDeleted(Boolean deleted) {
         Deleted = deleted;
     }
+
+    //region - Query SQL Methods -
+    private static ProductDatabaseService getProductDatabaseService() {
+        try {
+            Context initContext = null;
+            DataSource dataSource;
+
+            initContext = new InitialContext();
+            Context envContext = (Context) initContext.lookup("java:comp/env");
+            dataSource = (DataSource) envContext.lookup("jdbc/asm_codedy");
+
+            return new ProductDatabaseService(dataSource);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static List<Product> all() {
+        //Cách 1: Mapping model bằng tay thủ công
+        /*try {
+            return getProductDatabaseService().all();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }*/
+
+        //Cách 2: Tự lập trình chức năng "Auto Mapping To Model", để tái sử dụng nhiều lần
+        return (List<Product>) DatabaseUtility.executeQuery_AutoMappingToModel("SELECT * FROM product WHERE deleted = false ORDER BY id DESC", Product.class.getName());
+    }
+
+    public static Product find(int id) {
+        //Cách 1: Mapping model bằng tay thủ công
+        /*try {
+            return getProductDatabaseService().find(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }*/
+
+        //Cách 2: Tự lập trình chức năng "Auto Mapping To Model", để tái sử dụng nhiều lần
+        List<?> result = DatabaseUtility.executeQuery_AutoMappingToModel("SELECT * FROM product WHERE deleted = false and id = " + id, Product.class.getName());
+        if (result.size() == 0) {
+            return null;
+        }
+
+        return (Product) result.get(0);
+    }
+
+    public static void create(Product product) {
+        try {
+            //getProductDatabaseService().create(product);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void update(Product product) {
+        try {
+            getProductDatabaseService().update(product);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void delete(int id) {
+        try {
+            //getProductDatabaseService().delete(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<Product> search(String keyword) {
+        //Cách 1: Mapping model bằng tay thủ công
+        /*try {
+            return getProductDatabaseService().search();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }*/
+
+        //Cách 2: Tự lập trình chức năng "Auto Mapping To Model", để tái sử dụng nhiều lần
+        return (List<Product>) DatabaseUtility.executeQuery_AutoMappingToModel("SELECT * FROM product WHERE deleted = false and name like '%" + keyword + "%' ORDER BY id DESC", Product.class.getName());
+    }
+    //endregion
 }

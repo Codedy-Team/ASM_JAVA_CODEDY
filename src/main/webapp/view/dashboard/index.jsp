@@ -53,14 +53,14 @@
         </div>
 
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" name="search" value="" placeholder="Search">
+            <input class="form-control mr-sm-2" type="search" name="search" value="${param.search}" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
                     style="padding: 5px 5px; line-height: 0">
                 <i class="material-icons" data-toggle="tooltip" style="padding: 0; margin: 0"
                    title="Search">&#xe8b6;</i>
             </button>
             <button class="btn btn-outline-success my-2 my-sm-0" type="button"
-                    onclick="window.location.href='index.html'; return false;" style="padding: 5px 5px; line-height: 0">
+                    onclick="window.location.href='admin/product'; return false;" style="padding: 5px 5px; line-height: 0">
                 <i class="material-icons" data-toggle="tooltip" style="padding: 0; margin: 0"
                    title="Reset search, view all list">&#xe8fa;</i>
             </button>

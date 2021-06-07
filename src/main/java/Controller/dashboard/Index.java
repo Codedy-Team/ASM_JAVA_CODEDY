@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/admin/product/", "/admin/product/index", "/admin/product/index/"})
+@WebServlet(urlPatterns = {"/admin/product", "/admin/product/", "/admin/product/index", "/admin/product/index/"})
 public class Index extends HttpServlet {
     private ProductDatabaseService productDbUtil;
     private DataSource dataSource;
@@ -40,12 +40,17 @@ public class Index extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String keyword = request.getParameter("search");
 
         List<Product> products = null;
-        try {
-            products = productDbUtil.getProducts();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (keyword != null) {
+            products = Product.search(keyword);
+        } else {
+            try {
+                products = productDbUtil.getProducts();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         request.setAttribute("PRODUCT_LIST", products);

@@ -174,4 +174,37 @@ public class ProductDatabaseService {
             exc.printStackTrace();
         }
     }
+
+    public void Create(Product theProduct) throws Exception {
+        Connection myConn = null;
+        PreparedStatement myStmt = null;
+
+        try {
+            myConn = dataSource.getConnection();
+
+            String sql = "insert into product "
+                    + "(productCategoryId, restaurantId, name, ingredients, price, image, country, tag, description, featured)"
+                    + "value (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            myStmt = myConn.prepareStatement(sql);
+
+            myStmt.setInt(1, theProduct.getProductCategoryId());
+            myStmt.setInt(2, theProduct.getRestaurantId());
+            myStmt.setString(3, theProduct.getName());
+            myStmt.setString(4, theProduct.getIngredients());
+            myStmt.setDouble(5, theProduct.getPrice());
+            myStmt.setString(6, theProduct.getImage());
+            myStmt.setString(7, theProduct.getCountry());
+            myStmt.setString(8, theProduct.getTag());
+            myStmt.setString(9, theProduct.getDescription());
+            myStmt.setBoolean(10, theProduct.getFeatured());
+
+            myStmt.execute();
+        }
+        finally {
+            close(myConn, myStmt, null);
+        }
+
+    }
+
 }

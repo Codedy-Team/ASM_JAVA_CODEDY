@@ -41,7 +41,7 @@
                     <h2>Manage <b>Product Menus</b></h2>
                 </div>
                 <div class="col-sm-6">
-                    <a href="create.html" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add
+                    <a href="view/dashboard/create.jsp" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add
                                 New Product</span></a>
                     <a href="javascript:deleteSelectedItem()" class="btn btn-danger"
                        onclick="return confirm('Are you sure delete all selected item?')">

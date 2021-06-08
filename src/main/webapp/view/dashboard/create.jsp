@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <base href="">
+    <base href="<c:url value="/"/>">
     
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +47,7 @@
             </div>
             <div class="">
 
-                <form action="create.html" method="post">
+                <form action="admin/product/create" method="post">
                     <div class="modal-header">
                         <button class="back" style="vertical-align: middle"
                             onclick="window.location.href='index.html'; return false;">
@@ -91,12 +92,14 @@
                             <input class="form-control" type="text" name="price" required>
                         </div>
 
-                        <div class="required-group">
+                        <div class="form-group">
+                            <form action="<%=request.getContextPath()%>" method="post" enctype="multipart/form-data">
                             <label>image:</label>
-                            <input class="form-control" type="text" name="image" required>
+                            <input class="form-control" type="file" name="image" required>
+                            </form>
                         </div>
 
-                        <div class="form-group">
+                        <div class="required-group">
                             <label>country:</label>
                             <input class="form-control" type="text" name="country" required>
                         </div>
@@ -122,6 +125,9 @@
                             <input type="submit" class="btn btn-info" value="Save">
                         </div>
 
+                        <div class="modal-footer">
+                            <a href="/view/dashboard/index.jsp">Back to list</a>
+                        </div>
                     </div>
                 </form>
 

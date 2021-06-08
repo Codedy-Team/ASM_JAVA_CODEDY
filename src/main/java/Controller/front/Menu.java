@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/product/", "/product/menu"})
+@WebServlet(urlPatterns = {"/menu", "/menu/"})
 public class Menu extends HttpServlet {
     private ProductDatabaseService productDbUtil;
     private DataSource dataSource;

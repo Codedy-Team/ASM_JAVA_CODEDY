@@ -57,7 +57,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a class="active" href="index.jsp">home</a></li>
-                                        <li><a href="/ASM_JAVA_CODEDY_war_exploded/product/menu">Menu</a></li>
+                                        <li><a href="menu">Menu</a></li>
                                         <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
                                                 <li><a href="about.jsp">about</a></li>

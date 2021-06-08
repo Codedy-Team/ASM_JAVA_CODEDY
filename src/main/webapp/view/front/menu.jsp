@@ -176,6 +176,10 @@
                                     <h3>#${product.id}. ${product.name}</h3>
                                     <p class="text">${product.description}</p>
                                     <span>$${product.price}</span>
+                                    <a href="cart/add/?product_id=${product.id}" class="btn">
+                                        <i class="fa fa-cart-plus"></i>
+                                        Add to cart
+                                    </a>
                                 </div>
                             </div>
                         </div>
